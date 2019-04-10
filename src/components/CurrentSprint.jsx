@@ -19,7 +19,7 @@ class CurrentSprint extends Component {
             board_id
         };
 
-       return { id: `jira.currentsprint`,
+        return { id: `jira.currentsprint`,
                  params: params
         };
     }
@@ -29,10 +29,18 @@ class CurrentSprint extends Component {
         this.setState({ sprint_info: data});
     }
 
+    calcDays(date) {
+        const currentDate = new Date();
+        const endDate = new Date(date);
+        const timeDiff = endDate.getTime() - currentDate.getTime();
+        const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        return diffDays < 0 ? 0 : diffDays;
+    }
+
     render() {
         const { project, board_id } = this.props;
         const { sprint_info } = this.state;
-
+        const remainDays = this.calcDays(sprint_info.endDate);
         return (
             <div>
                 <div className="widget__header">
@@ -43,6 +51,9 @@ class CurrentSprint extends Component {
                     <i className="fa fa-jira" aria-hidden="true" />
                 </div>
                 <div className="widget__body">
+                    <span className="jira__sprint__remain">
+                        { endDate }
+                    </span>
                 </div>
             </div>
         );

@@ -19,10 +19,8 @@ const client = mozaik => {
         mozaik.logger.info(chalk.yellow(`[jira] fetching from ${ url }`));
 
         return req
-            .auth(
-                config.get('jira.basicAuthUser'),
-                config.get('jira.basicAuthKey')
-            )
+            .set({'Content-Type': 'application/json', 
+            'Authorization': 'Basic ' + config.get('jira.basicAuthKey')})
             .promise()
             .catch(error => {
                 mozaik.logger.error(chalk.red(`[jira] ${ error }`));
@@ -33,11 +31,11 @@ const client = mozaik => {
 
     const methods = {
         currentsprint(params) {
-            return buildRequest(`rest/agile/1.0/board/${ params.board_id }/sprint?state=active`)
+            return buildRequest(`/rest/agile/1.0/board/${ params.board_id }/sprint?state=active`)
                 .then(res => res.body.values)
             ;
         }
-      };
+    };
 
     return methods;
 };
