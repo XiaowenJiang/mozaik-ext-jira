@@ -31,9 +31,13 @@ const client = mozaik => {
 
     const methods = {
         currentsprint(params) {
-            return buildRequest(`/rest/agile/1.0/board/${ params.board_id }/sprint?state=active`)
-                .then(res => res.body.values)
-            ;
+            let info = {};
+            info['sprint_info'] = buildRequest(`/rest/agile/1.0/board/${ params.board_id }/sprint?state=active`)
+                .then(res => res.body.values);
+            const sprint_id = sprint_info[0].id;
+            info['issues'] = buildRequest(`/rest/agile/1.0/board/1952/sprint/${sprint_id}/issue`)
+                .then(res => res.body.issues);
+            return info;
         }
     };
 

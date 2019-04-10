@@ -2,13 +2,14 @@ import React, { Component, PropTypes } from 'react'; // eslint-disable-line no-u
 import reactMixin                      from 'react-mixin';
 import { ListenerMixin }               from 'reflux';
 import Mozaik                          from 'mozaik/browser';
+import chalk                           from 'chalk';
 
 class CurrentSprint extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            sprint_info: {}
+            info: {}
         };
     }
 
@@ -26,7 +27,7 @@ class CurrentSprint extends Component {
 
     onApiData(data) {
         console.log(data);
-        this.setState({ sprint_info: data});
+        this.setState({ info: data});
     }
 
     calcDays(date) {
@@ -39,20 +40,25 @@ class CurrentSprint extends Component {
 
     render() {
         const { project, board_id } = this.props;
-        const { sprint_info } = this.state;
-        const remainDays = this.calcDays(sprint_info.endDate);
+        const { info } = this.state;
+        console.log('render');
+        if (!info || !("sprint_info" in info) || !("issues" in info)) {
+            return (
+                <div>Loading...</div>
+            );
+        }       
+        const endDate = info["sprint_info"][0].endDate;
+        const issues = info["issues"];
+        const remainDays = this.calcDays(endDate);
         return (
             <div>
                 <div className="widget__header">
                     <span className="widget__header__subject">Jira Project: { project }</span>
-                    <span className="widget__header__count">
-                        { length }
-                    </span>
-                    <i className="fa fa-jira" aria-hidden="true" />
+                    <i className="fab fa-jira"/>
                 </div>
                 <div className="widget__body">
                     <span className="jira__sprint__remain">
-                        { endDate }
+                        { remainDays }
                     </span>
                 </div>
             </div>
