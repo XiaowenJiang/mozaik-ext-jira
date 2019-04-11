@@ -1,19 +1,30 @@
-.jira {
-  &__sprint {
-    position relative;
-    min-height 34px;
-    padding 9px 15px 9px 50px;
-    &__id {
-      right 3px;
-      color #30C279;
-      fontWeight: bold;
+.jira__sprint
+  .widget__body
+    display flex
+    display -webkit-flex
+    justify-content center
+    -webkit-justify-content center
 
-    }
-    &__remain {
-      min-height: 20px;
-      color #AD408E;
-      font-size: 14px;
-      display block;
-    }
-  }
-}
+  &__description
+    font-size 15px
+  &__remain
+    color #AD408E
+    font-size 32px
+    line-height 32px
+    display block
+  &__issue
+    display flex
+    flex-wrap wrap
+    justify-content space-between
+    &__undefined
+      color $unknown-color
+      border-radius 50%
+    &__todo
+      color #607D8B
+      border-radius 50%
+    &__inprogress
+      color #FFFF00
+      border-radius 50%
+    &__done
+      color $success-color
+      border-radius 50%

@@ -9,7 +9,7 @@ class CurrentSprint extends Component {
         super(props);
 
         this.state = {
-            info: {}
+            info: []
         };
     }
 
@@ -25,9 +25,8 @@ class CurrentSprint extends Component {
         };
     }
 
-    onApiData(data) {
-        console.log(data);
-        this.setState({ info: data});
+    onApiData(info) {
+        this.setState({ info });
     }
 
     calcDays(date) {
@@ -38,29 +37,69 @@ class CurrentSprint extends Component {
         return diffDays < 0 ? 0 : diffDays;
     }
 
+    calcIssuesByStatus(issues) {
+        let statusGroup = {};
+        statusGroup["undefined"] = 0;
+        statusGroup["toDo"] = 0;
+        statusGroup["inProgress"] = 0;
+        statusGroup["done"] = 0;
+        issues.forEach(issue => {
+            switch (issue.fields.status.statusCategory.id) {
+                case 1:
+                    statusGroup["undefined"]++;
+                    break;
+                case 2:
+                    statusGroup["toDo"]++;
+                    break;
+                case 3:
+                    statusGroup["done"]++;
+                    break;
+                case 4:
+                    statusGroup["inProgress"]++;
+                    break;
+                default:
+                    break;
+            }
+        });
+        return statusGroup;
+    }
+
     render() {
         const { project, board_id } = this.props;
         const { info } = this.state;
         console.log('render');
-        if (!info || !("sprint_info" in info) || !("issues" in info)) {
-            return (
-                <div>Loading...</div>
+        var sprintNode = (
+            <div className="widget__body">
+            <span className="jira__loading">Loading...</span>
+            </div>
+        );
+        if (info && info.length == 2) {
+            const endDate = info[0][0].endDate;
+            const issues = info[1];
+            const remainDays = this.calcDays(endDate);
+            const statusGroup = this.calcIssuesByStatus(issues);
+            sprintNode = (
+                <div className="widget__body">
+                    <h3 className="jira__sprint__description">
+                    Sprint Remaining Days:</h3>
+                    <span className="jira__sprint__remain">
+                        { remainDays }
+                    </span>
+                    <div className="jira__sprint__issue">
+                        <span className="jira__sprint__issue__todo">{ statusGroup["toDo"] }</span>
+                        <span className="jira__sprint__issue__inprogress">{ statusGroup["inProgress"] }</span>
+                        <span className="jira__sprint__issue__done">{ statusGroup["done"] }</span>
+                    </div>
+                </div>
             );
         }       
-        const endDate = info["sprint_info"][0].endDate;
-        const issues = info["issues"];
-        const remainDays = this.calcDays(endDate);
         return (
             <div>
                 <div className="widget__header">
                     <span className="widget__header__subject">Jira Project: { project }</span>
                     <i className="fab fa-jira"/>
                 </div>
-                <div className="widget__body">
-                    <span className="jira__sprint__remain">
-                        { remainDays }
-                    </span>
-                </div>
+                { sprintNode }
             </div>
         );
     }
