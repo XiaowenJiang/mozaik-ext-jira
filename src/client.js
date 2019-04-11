@@ -37,7 +37,7 @@ const client = mozaik => {
                     const sprint_id = values[0].id;
                     const reqs = [];
                     reqs.push(Promise.resolve(values));
-                    reqs.push(buildRequest(`/rest/agile/1.0/board/${ params.board_id }/sprint/${sprint_id}/issue`)
+                    reqs.push(buildRequest(`/rest/agile/1.0/board/${ params.board_id }/sprint/${sprint_id}/issue?fields=status`)
                         .then(res => res.body.issues));
                     return Promise.all(reqs).then(data => data);
                 })

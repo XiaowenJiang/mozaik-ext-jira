@@ -75,17 +75,23 @@ class CurrentSprint extends Component {
         );
         if (info && info.length == 2) {
             const endDate = info[0][0].endDate;
+            const sprintName = info[0][0].name;
             const issues = info[1];
             const remainDays = this.calcDays(endDate);
             const statusGroup = this.calcIssuesByStatus(issues);
             sprintNode = (
                 <div className="widget__body">
+                    <span className="jira__sprint__name">
+                        { sprintName }
+                    </span>
                     <span className="jira__sprint__description">
                     Sprint Remaining Days:
                     </span>
-                    <span className="jira__sprint__remain">
-                        { remainDays }
-                    </span>
+                    <div className="jira__sprint__remain">
+                        <span className="jira__sprint__remain__text-circle">
+                            { remainDays }
+                        </span>
+                    </div>
                     <div className="jira__sprint__issue">
                         <span className="jira__sprint__issue__text">Undefined:</span>
                         <span className="jira__sprint__issue__undefined jira__sprint__issue__status">{ statusGroup["undefined"] }</span>
