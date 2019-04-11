@@ -70,7 +70,7 @@ class CurrentSprint extends Component {
         console.log('render');
         var sprintNode = (
             <div className="widget__body">
-            <span className="jira__loading">Loading...</span>
+            <span className="jira__sprint__loading">Loading...</span>
             </div>
         );
         if (info && info.length == 2) {
@@ -80,15 +80,21 @@ class CurrentSprint extends Component {
             const statusGroup = this.calcIssuesByStatus(issues);
             sprintNode = (
                 <div className="widget__body">
-                    <h3 className="jira__sprint__description">
-                    Sprint Remaining Days:</h3>
+                    <span className="jira__sprint__description">
+                    Sprint Remaining Days:
+                    </span>
                     <span className="jira__sprint__remain">
                         { remainDays }
                     </span>
                     <div className="jira__sprint__issue">
-                        <span className="jira__sprint__issue__todo">{ statusGroup["toDo"] }</span>
-                        <span className="jira__sprint__issue__inprogress">{ statusGroup["inProgress"] }</span>
-                        <span className="jira__sprint__issue__done">{ statusGroup["done"] }</span>
+                        <span className="jira__sprint__issue__text">Undefined:</span>
+                        <span className="jira__sprint__issue__undefined jira__sprint__issue__status">{ statusGroup["undefined"] }</span>
+                        <span className="jira__sprint__issue__text">toDo:</span>
+                        <span className="jira__sprint__issue__todo jira__sprint__issue__status">{ statusGroup["toDo"] }</span>
+                        <span className="jira__sprint__issue__text">inProgress:</span>
+                        <span className="jira__sprint__issue__inprogress jira__sprint__issue__status">{ statusGroup["inProgress"] }</span>
+                        <span className="jira__sprint__issue__text">Done:</span>
+                        <span className="jira__sprint__issue__done jira__sprint__issue__status">{ statusGroup["done"] }</span>
                     </div>
                 </div>
             );

@@ -1,30 +1,35 @@
 .jira__sprint
-  .widget__body
-    display flex
-    display -webkit-flex
-    justify-content center
-    -webkit-justify-content center
-
+  &__loading
+    display block
+    margin 40px 0 0 50px
+    font-size 32px
   &__description
+    margin 40px 0 0 50px
+    display block
+    width 100%
     font-size 15px
   &__remain
-    color #AD408E
-    font-size 32px
-    line-height 32px
+    margin-left 40px
+    padding 20px
     display block
+    color #AD408E
+    font-weight bold
+    font-size 50px
   &__issue
-    display flex
-    flex-wrap wrap
-    justify-content space-between
+    margin-left 40px
+    width 30px
+    &__text
+      font-size 13px
+      margin-right 3px
+    &__status
+      font-weight bold
+      font-size 15px
+      margin 0 20px 10px 0
     &__undefined
-      color $unknown-color
-      border-radius 50%
+      color #CCCED1
     &__todo
-      color #607D8B
-      border-radius 50%
+      color #C5CAE9
     &__inprogress
       color #FFFF00
-      border-radius 50%
     &__done
       color $success-color
-      border-radius 50%
