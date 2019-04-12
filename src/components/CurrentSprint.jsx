@@ -76,21 +76,25 @@ class CurrentSprint extends Component {
         if (info && info.length == 2) {
             const endDate = info[0][0].endDate;
             const sprintName = info[0][0].name;
+            const sprintId = info[0][0].id;
+            const sprintLink = info[0][0].baseUrl + "/secure/RapidBoard.jspa?rapidView=" + board_id + "&sprint=" + sprintId;
             const issues = info[1];
             const remainDays = this.calcDays(endDate);
             const statusGroup = this.calcIssuesByStatus(issues);
             sprintNode = (
                 <div className="widget__body">
-                    <span className="jira__sprint__name">
-                        { sprintName }
-                    </span>
-                    <span className="jira__sprint__description">
-                    Sprint Remaining Days:
-                    </span>
-                    <div className="jira__sprint__remain">
-                        <span className="jira__sprint__remain__text-circle">
-                            { remainDays }
+                    <div className="jira__sprint__title">
+                        <span className="jira__sprint__title__description">
+                            Sprint Remaining Days:
                         </span>
+                        <span className="jira__sprint__title__name">
+                            { sprintName }
+                        </span>
+                    </div>
+                    <div className="jira__sprint__remain">
+                        <a href={sprintLink} className="jira__sprint__remain__text-circle">
+                            { remainDays }
+                        </a>
                     </div>
                     <div className="jira__sprint__issue">
                         <span className="jira__sprint__issue__text">Undefined:</span>

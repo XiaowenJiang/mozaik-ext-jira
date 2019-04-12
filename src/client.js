@@ -33,9 +33,10 @@ const client = mozaik => {
         currentsprint(params) {
             return buildRequest(`/rest/agile/1.0/board/${ params.board_id }/sprint?state=active`)
                 .then(res => {
-                    const values = res.body.values;
+                    let values = res.body.values;
                     const sprint_id = values[0].id;
                     const reqs = [];
+                    values[0]["baseUrl"] = config.get('jira.baseUrl');
                     reqs.push(Promise.resolve(values));
                     reqs.push(buildRequest(`/rest/agile/1.0/board/${ params.board_id }/sprint/${sprint_id}/issue?fields=status`)
                         .then(res => res.body.issues));

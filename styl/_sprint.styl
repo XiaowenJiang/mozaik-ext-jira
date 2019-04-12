@@ -1,48 +1,57 @@
 .jira__sprint
+  .widget__body
+    padding 1.6vmin
+    display flex
+    justify-content center
+    align-content stretch
+    flex-direction column
+
   &__loading
     display block
     margin 40px 0 0 50px
-    font-size 32px
-  &__name
-    margin 10px 0 0 50px
-    display block
+    font-size 1.6em
+  &__title
+    display flex
+    display -webkit-flex
+    margin-top 10px
     width 100%
-    font-size 18px
-    font-weight 600
-  &__description
-    margin 10px 0 0 50px
-    display block
-    width 100%
-    font-size 15px
+    height 20%
+    justify-content space-around
+    &__name
+      font-size 1em
+    &__description
+      font-weight 600
+      font-size 1.5em
   &__remain
+    height 50%
     width 100%
-    height 100%
-    margin auto
-    display block
+    display -webkit-flex
+    display flex
+    -webkit-justify-content center
+    justify-content         center
+    -webkit-align-items center
+    align-items         center
+    text-align center
     &__text-circle
-      display block
-      width 120px
-      height 120px
-      line-height 120px
       margin auto
+      width 7rem
+      height 7rem
+      line-height 7rem
       border-radius 50%
+      font-family sans-serif
       font-weight bold
-      font-size 70px
+      font-size 6rem
       color #FFFFFF
-      text-align center
-      vertical-align middle
       background #86772D
   &__issue
-    position absolute
-    bottom 20px
     display block
-    margin 40px 0 0 50px
+    margin-left 50px
     &__text
-      font-size 15px
+      font-size 1em
       margin-right 5px
     &__status
       font-weight bold
-      font-size 15px
+      font-size 1em
       margin-right 20px
     &__undefined
       color #CCCED1
