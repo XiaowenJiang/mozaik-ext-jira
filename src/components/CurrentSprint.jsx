@@ -113,7 +113,7 @@ class CurrentSprint extends Component {
             <div>
                 <div className="widget__header">
                     <span className="widget__header__subject">Jira Project: { project }</span>
-                    <i className="fab fa-jira"/>
+                    <i className="fa fa-tasks" aria-hidden="true"/>
                 </div>
                 { sprintNode }
             </div>
