@@ -85,7 +85,7 @@ class CurrentSprint extends Component {
                 <div className="widget__body">
                     <div className="jira__sprint__title">
                         <span className="jira__sprint__title__description">
-                            Sprint Remaining Days:
+                            Sprint Remaining Days
                         </span>
                         <span className="jira__sprint__title__name">
                             { sprintName }
@@ -97,13 +97,13 @@ class CurrentSprint extends Component {
                         </a>
                     </div>
                     <div className="jira__sprint__issue">
-                        <span className="jira__sprint__issue__text">Undefined:</span>
+                        <span className="jira__sprint__issue__text">UNDEFINED:</span>
                         <span className="jira__sprint__issue__undefined jira__sprint__issue__status">{ statusGroup["undefined"] }</span>
-                        <span className="jira__sprint__issue__text">toDo:</span>
+                        <span className="jira__sprint__issue__text">TODO:</span>
                         <span className="jira__sprint__issue__todo jira__sprint__issue__status">{ statusGroup["toDo"] }</span>
-                        <span className="jira__sprint__issue__text">inProgress:</span>
+                        <span className="jira__sprint__issue__text">IN-PROGRESS:</span>
                         <span className="jira__sprint__issue__inprogress jira__sprint__issue__status">{ statusGroup["inProgress"] }</span>
-                        <span className="jira__sprint__issue__text">Done:</span>
+                        <span className="jira__sprint__issue__text">DONE:</span>
                         <span className="jira__sprint__issue__done jira__sprint__issue__status">{ statusGroup["done"] }</span>
                     </div>
                 </div>
