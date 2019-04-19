@@ -33,7 +33,25 @@ class CurrentSprint extends Component {
         const currentDate = new Date();
         const endDate = new Date(date);
         const timeDiff = endDate.getTime() - currentDate.getTime();
-        const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        //TODO: verify how to show the remaining days.
+        // Currently, only workdays are shown, and the time diff is floored.
+        let diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+
+        let varDate = currentDate;
+        while (varDate < endDate) {
+            // Get the day of the week (0 - 6) of the Date.
+            // Note that Sunday = 0 and Monday = 1
+            const day = varDate.getDay();
+            switch (day) {
+                case 0:
+                case 6:
+                    diffDays--;
+                    break;
+                default:
+                    break;
+            }
+            varDate.setDate(varDate.getDate() + (day == 0 ? 6 : 1));
+        }
         return diffDays < 0 ? 0 : diffDays;
     }
 
